@@ -1,7 +1,7 @@
 import { db } from "./config";
 import {
   collection,
-  addDoc,
+  setDoc,
   getDocs,
   deleteDoc,
   Timestamp,
@@ -25,7 +25,7 @@ export const addMarker = async (newPosition) => {
     const timestamp = Timestamp.now();
     newPosition.createdAt = timestamp;
 
-    await addDoc(collection(db, "markers"), newPosition);
+    await setDoc(doc(db, "markers", `quest-${newPosition.label}`), newPosition);
   } catch (error) {
     console.log(error.message);
   }
