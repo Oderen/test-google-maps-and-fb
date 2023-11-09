@@ -2,6 +2,7 @@ import { GoogleMap } from "@react-google-maps/api";
 import { useRef, useCallback, useState, useEffect } from "react";
 import { MarkerF } from "@react-google-maps/api";
 import { getAllMarkers, addMarker } from "../../Firebase/api-operations";
+import ResetBtn from "../ResetBtn";
 import css from "./Map.module.css";
 
 const containerStyle = {
@@ -42,12 +43,6 @@ const Map = () => {
     addMarker(newPosition);
   };
 
-  // const convertFbTimeToReal = (fbTime) => {
-  //   const realTime = (fbTime.seconds + fbTime.nanoseconds / 1000000000) * 1000;
-  //   const currentdate = new Date(realTime).toString();
-  //   return currentdate;
-  // };
-
   const onLoad = useCallback(function callback(map) {
     mapRef.current = map;
   }, []);
@@ -57,6 +52,7 @@ const Map = () => {
 
   return (
     <div className={css.container}>
+      <ResetBtn resetMarkers={() => setMarkers([])} />
       <GoogleMap
         mapContainerStyle={containerStyle}
         center={defaultLocation}
@@ -65,12 +61,8 @@ const Map = () => {
         onUnmount={onUnmount}
         onClick={onHandleClick}
       >
-        {markers.map(({ location, label, createdAt }) => {
-          // const currentDate = convertFbTimeToReal(createdAt);
-
-          return (
-            <MarkerF key={label} position={location} label={label}></MarkerF>
-          );
+        {markers.map(({ location, label }) => {
+          return <MarkerF key={label} position={location} label={label} />;
         })}
       </GoogleMap>
     </div>

@@ -1,5 +1,12 @@
 import { db } from "./config";
-import { collection, addDoc, getDocs, Timestamp } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  getDocs,
+  deleteDoc,
+  Timestamp,
+  doc,
+} from "firebase/firestore";
 
 export const getAllMarkers = async () => {
   try {
@@ -21,5 +28,17 @@ export const addMarker = async (newPosition) => {
     await addDoc(collection(db, "markers"), newPosition);
   } catch (error) {
     console.log(error.message);
+  }
+};
+
+export const deleteAllDocuments = async () => {
+  try {
+    const colRef = await getDocs(collection(db, "markers"));
+
+    colRef.forEach(async (document) => {
+      await deleteDoc(doc(db, "markers", document.id));
+    });
+  } catch (error) {
+    console.error("Error deleting documents: ", error);
   }
 };

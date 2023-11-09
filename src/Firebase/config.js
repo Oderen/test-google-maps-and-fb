@@ -2,7 +2,6 @@ import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 
 const API_KEY = process.env.REACT_APP_API_KEY_FB;
-console.log("FB Key", API_KEY);
 
 const firebaseConfig = {
   apiKey: API_KEY,
