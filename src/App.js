@@ -1,25 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import { Map } from "./components/Map";
+import { useJsApiLoader } from "@react-google-maps/api";
 
-function App() {
+const API_KEY = process.env.REACT_APP_API_KEY;
+
+const App = () => {
+  const { isLoaded } = useJsApiLoader({
+    id: "google-map-script",
+    googleMapsApiKey: API_KEY,
+  });
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <h1 className="title">Test Asignment</h1>
+      {isLoaded ? <Map /> : <h2 className="loader">Loadding...</h2>}
+    </>
   );
-}
+};
 
 export default App;
