@@ -1,6 +1,6 @@
 import { GoogleMap } from "@react-google-maps/api";
 import { useRef, useCallback, useState, useEffect } from "react";
-import { MarkerF, InfoWindowF } from "@react-google-maps/api";
+import { MarkerF } from "@react-google-maps/api";
 import { getAllMarkers, addMarker } from "../../Firebase/api-operations";
 import css from "./Map.module.css";
 
