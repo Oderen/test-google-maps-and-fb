@@ -8,7 +8,7 @@ const DeleteBtn = ({ resetMarkers }) => {
   };
   return (
     <button className="delete-btn" type="reset" onClick={deleteMarkers}>
-      іфвфівфвфівфів
+      123
     </button>
   );
 };
